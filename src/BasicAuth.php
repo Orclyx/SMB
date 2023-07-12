@@ -21,7 +21,7 @@
 
 namespace Icewind\SMB;
 
-class BasicAuth implements IAuth {
+class BasicAuth extends AbstractAuth {
 	/** @var string */
 	private $username;
 	/** @var string|null */
@@ -33,6 +33,7 @@ class BasicAuth implements IAuth {
 		$this->username = $username;
 		$this->workgroup = $workgroup;
 		$this->password = $password;
+		parent::__construct();
 	}
 
 	public function getUsername(): ?string {

@@ -39,6 +39,7 @@ class KerberosApacheAuth extends KerberosAuth implements IAuth {
 
 	public function __construct() {
 		$this->ticketName = getenv("KRB5CCNAME");
+		parent::__construct();
 	}
 
 

@@ -205,14 +205,15 @@ class RawConnection {
 	/**
 	 * @param string|null $user
 	 * @param string|null $password
+	 * @param resource $file
 	 * @psalm-assert resource $this->authStream
 	 */
-	public function writeAuthentication(?string $user, ?string $password): void {
+	public function writeAuthentication(?string $user, ?string $password, $file): void {
 		$auth = ($password === null)
 			? "username=$user"
 			: "username=$user\npassword=$password\n";
 
-		$this->authStream = fopen('php://temp', 'w+');
+		$this->authStream = $file;
 		fwrite($this->authStream, $auth);
 	}
 

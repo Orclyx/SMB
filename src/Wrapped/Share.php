@@ -78,7 +78,7 @@ class Share extends AbstractShare {
 
 	private function getAuthFileArgument(): string {
 		if ($this->server->getAuth()->getUsername()) {
-			return '--authentication-file=' . $this->system->getFD(3);
+			return '--authentication-file=' . stream_get_meta_data($this->server->getAuth()->getFile())['uri'];
 		} else {
 			return '';
 		}
@@ -105,7 +105,7 @@ class Share extends AbstractShare {
 			escapeshellarg('//' . $this->server->getHost() . '/' . $this->name)
 		);
 		$connection = new Connection($command, $this->parser);
-		$connection->writeAuthentication($this->server->getAuth()->getUsername(), $this->server->getAuth()->getPassword());
+		$connection->writeAuthentication($this->server->getAuth()->getUsername(), $this->server->getAuth()->getPassword(), $this->server->getAuth()->getFile());
 		$connection->connect();
 		if (!$connection->isValid()) {
 			throw new ConnectionException((string)$connection->readLine());
@@ -534,7 +534,7 @@ class Share extends AbstractShare {
 			escapeshellarg($path)
 		);
 		$connection = new RawConnection($command);
-		$connection->writeAuthentication($this->server->getAuth()->getUsername(), $this->server->getAuth()->getPassword());
+		$connection->writeAuthentication($this->server->getAuth()->getUsername(), $this->server->getAuth()->getPassword(), $this->server->getAuth()->getFile());
 		$connection->connect();
 		if (!$connection->isValid()) {
 			throw new ConnectionException((string)$connection->readLine());

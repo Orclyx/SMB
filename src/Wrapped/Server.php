@@ -60,7 +60,7 @@ class Server extends AbstractServer {
 			escapeshellarg('//' . $this->getHost())
 		);
 		$connection = new RawConnection($command);
-		$connection->writeAuthentication($this->getAuth()->getUsername(), $this->getAuth()->getPassword());
+		$connection->writeAuthentication($this->getAuth()->getUsername(), $this->getAuth()->getPassword(), $this->getAuth()->getFile());
 		$connection->connect();
 		if (!$connection->isValid()) {
 			throw new ConnectionException((string)$connection->readLine());

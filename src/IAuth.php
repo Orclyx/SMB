@@ -41,4 +41,9 @@ interface IAuth {
 	 * @param resource $smbClientState
 	 */
 	public function setExtraSmbClientOptions($smbClientState): void;
+
+	/**
+	 * @return resource
+	 */
+	public function getFile();
 }

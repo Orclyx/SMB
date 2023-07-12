@@ -26,7 +26,7 @@ use Icewind\SMB\Exception\Exception;
 /**
  * Use existing kerberos ticket to authenticate
  */
-class KerberosAuth implements IAuth {
+class KerberosAuth extends AbstractAuth {
 	public function getUsername(): ?string {
 		return 'dummy';
 	}

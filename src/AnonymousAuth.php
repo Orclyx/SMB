@@ -23,7 +23,7 @@ namespace Icewind\SMB;
 
 use Icewind\SMB\Exception\Exception;
 
-class AnonymousAuth implements IAuth {
+class AnonymousAuth extends AbstractAuth {
 	public function getUsername(): ?string {
 		return null;
 	}
